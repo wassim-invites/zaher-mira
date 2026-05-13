@@ -36,6 +36,15 @@
   "couplePhotoMid2": "Zaher & Mira/ZM5.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {},
+  "guests": {
+    "Wassim-Fadi-Al-Baba": {
+      "en": "Wassim Fadi Al Baba",
+      "ar": "عائلة وسيم",
+      "members": [
+        "Mira",
+        "Zaher"
+      ]
+    }
+  },
   "_baseUrl": "https://wassim-invites.github.io/zaher-mira/"
 }
