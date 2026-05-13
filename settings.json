@@ -37,6 +37,14 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
+    "Wassim-Al-Baba": {
+      "en": "Wassim Al Baba",
+      "ar": "الصديق الصدوق وسيم البابا المحترم",
+      "members": [
+        "Wassim",
+        "Mona"
+      ]
+    },
     "Wassim-Fadi-Al-Baba": {
       "en": "Wassim Fadi Al Baba",
       "ar": "عائلة وسيم",
