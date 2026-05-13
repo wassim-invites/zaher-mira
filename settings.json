@@ -37,6 +37,14 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
+    "Reine-Abboudys-Family": {
+      "en": "Reine Abboudy's Family",
+      "ar": "عائلة روني عبودي",
+      "members": [
+        "Reine",
+        "Toufic"
+      ]
+    },
     "Wassim-Al-Baba": {
       "en": "Wassim Al Baba",
       "ar": "الصديق الصدوق وسيم البابا المحترم",
