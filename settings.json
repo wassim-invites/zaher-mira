@@ -1,13 +1,13 @@
 {
   "groomName": "Zaher Houneineh",
   "groomNameAr": "زاهر حنيني",
-  "groomFamily": "Houneineh",
-  "groomFamilyAr": "حنيني",
-  "brideName": "Mira Chehade",
+  "groomFamily": "Khoury",
+  "groomFamilyAr": "خوري",
+  "brideName": "Lara Sassine",
   "brideNameAr": "ميرا شحادة",
-  "brideFamily": "Chehade",
-  "brideFamilyAr": "شحادة",
-  "weddingDate": "2027-01-06",
+  "brideFamily": "Sassine",
+  "brideFamilyAr": "ساسين",
+  "weddingDate": "2026-09-26",
   "ceremonyTime": "16:00",
   "receptionTime": "19:00",
   "invLang": "both",
@@ -19,48 +19,18 @@
   "venueNameAr": "قاعة الأعراس الكبرى",
   "venueAddress": "Beirut, Lebanon",
   "venueMap": "",
-  "photoInterval": "3",
+  "photoInterval": "4",
   "bibleQuote": "\"Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up.\" — Ecclesiastes 4:9-10",
   "bibleQuoteAr": "\"وَالاِثْنَانِ خَيْرٌ مِنَ الْوَاحِدِ، لأَنَّ لَهُمَا أُجْرَةً حَسَنَةً فِي تَعَبِهِمَا\" — الجامعة ٤:٩",
-  "bgMusic": "Zaher & Mira/music.mp3",
-  "wishAccount": "@ZaherMiraWedding",
-  "formspreeId": "mdabaapd",
-  "rsvpPhone": "76854236",
-  "rsvpEmail": "wassimbaba.1996@gmail.com",
-  "rsvpWebhook": "https://script.google.com/macros/s/AKfycbxwp6v0WGh43k35frsfI3PhYgapWYk_I0svMgt15mDHSl2_vHK2vm1-WoysLdxYwGfk/exec",
+  "bgMusic": "",
+  "wishAccount": "@ReineToufikWedding",
+  "formspreeId": "",
+  "rsvpPhone": "",
+  "rsvpEmail": "reine.abboudy5@gmail.com",
+  "rsvpWebhook": "",
   "ghRepo": "wassim-invites/zaher-mira",
-  "couplePhoto": "Zaher & Mira/ZM1.jpg",
-  "couplePhoto2": "Zaher & Mira/ZM2.jpg",
-  "couplePhoto3": "Zaher & Mira/ZM3.jpg",
-  "couplePhotoMid": "Zaher & Mira/ZM4.jpg",
-  "couplePhotoMid2": "Zaher & Mira/ZM5.jpg",
-  "couplePhotoMid3": "Zaher & Mira/ZM6.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {
-    "Wassim-Al-Baba-Family": {
-      "en": "Wassim Al Baba' Family",
-      "ar": "الصديق الصدوق وسيم البابا المحترم",
-      "members": [
-        "Wassim Al Baba",
-        "Mona Kahhale"
-      ]
-    },
-    "Tesingggg": {
-      "en": "Tesingggg",
-      "ar": "الصديق الصدوق وسيم البابا المحترم",
-      "members": [
-        "Wassim"
-      ]
-    },
-    "Wassimmm": {
-      "en": "Wassimmm",
-      "ar": "عائلة وسيم",
-      "members": [
-        "Wassim",
-        "Reine"
-      ]
-    }
-  },
+  "guests": {},
   "_baseUrl": "https://wassim-invites.github.io/zaher-mira/"
 }
