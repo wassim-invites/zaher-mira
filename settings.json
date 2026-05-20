@@ -1,57 +1,52 @@
 {
-  "groomName": "Zaher Houneineh",
-  "groomNameAr": "زاهر حنيني",
-  "groomFamily": "Houneineh",
-  "groomFamilyAr": "خوري",
-  "brideName": "Mira Chehade",
-  "brideNameAr": "ميرا شحادة",
+  "groomName": "Zaher",
+  "groomFamily": "Huneine",
+  "brideName": "Mira",
   "brideFamily": "Chehade",
-  "brideFamilyAr": "ساسين",
   "weddingDate": "2026-09-26",
-  "ceremonyTime": "16:00",
-  "receptionTime": "19:00",
-  "invLang": "both",
-  "churchName": "Al Amin Mosque, Beirut",
-  "churchNameAr": "جامع محمد الأمين — بيروت",
-  "churchAddress": "Beirut, Lebanon",
-  "churchMap": "",
+  "weddingTime": "20:00",
+  "weddingDay": "Saturday",
   "venueName": "Grand Ballroom",
-  "venueNameAr": "قاعة الأعراس الكبرى",
   "venueAddress": "Beirut, Lebanon",
   "venueMap": "",
-  "photoInterval": "3",
-  "bibleQuote": "“And among His signs is that He created for you spouses from among yourselves so that you may find tranquility in them, and He placed between you affection and mercy. Indeed in that are signs for people who reflect.”",
-  "bibleQuoteAr": "﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ ﴾\n— سورة الروم، الآية 21",
+  "heroText": "We are getting married",
+  "quranAr": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
+  "quranRef": "— Surah Ar-Rum 30:21",
+  "inviteTagline": "Request the honor of your presence at their wedding",
+  "countdownPre": "Not long to go...",
+  "countdownPost": "... Until we become one!",
+  "storyTitle": "Our Story",
+  "venueScriptTitle": "Time & Place",
+  "thanksText": "Thank You",
+  "rsvpTagline": "Your presence would mean the world to us and we can't imagine celebrating without you!",
+  "rsvpDeadlineText": "",
+  "rsvpPhone": "",
+  "rsvpWebhook": "",
+  "giftTitle": "Wedding Registry",
+  "giftTagline": "Your presence is the best gift you can give us, but should you feel inclined, a wedding list is available.",
+  "giftBankName": "",
+  "giftBankAccount": "",
+  "giftBankIban": "",
+  "giftWhishHandle": "",
   "bgMusic": "Zaher & Mira/music.mp3",
-  "wishAccount": "@ZaherMiraWedding",
-  "formspreeId": "mdabaapd",
-  "rsvpPhone": "76982756",
-  "rsvpEmail": "wassimbaba.1996@gmail.com",
-  "rsvpWebhook": "https://script.google.com/macros/s/AKfycbwSI-WEw5CB28n8weqcka-5iwj3fadFmeVvaZ1Bzh8cH_GPufO91yhL8dOPltdqtwCW/exec",
   "ghRepo": "wassim-invites/zaher-mira",
-  "couplePhoto": "Zaher & Mira/ZM2.jpg",
-  "couplePhoto2": "Zaher & Mira/ZM3.jpg",
-  "couplePhoto3": "Zaher & Mira/ZM4.jpg",
-  "couplePhotoMid": "Zaher & Mira/ZM5.jpg",
-  "galleryPhotos": [],
-  "galleryIdbKeys": [],
-  "guests": {
-    "Rony-Abboudys-Family": {
-      "en": "Rony Abboudy's Family",
-      "ar": "عائلة روني عبودي الكريمة",
-      "members": [
-        "Toufic",
-        "Reine"
-      ]
+  "storyItems": [
+    {
+      "caption": "Where it began",
+      "date": "",
+      "photo": ""
     },
-    "Wassim-Al-Baba": {
-      "en": "Wassim Al Baba",
-      "ar": "الصديق الصدوق وسيم البابا المحترم",
-      "members": [
-        "Wassim",
-        "Mona"
-      ]
+    {
+      "caption": "We got engaged",
+      "date": "",
+      "photo": ""
+    },
+    {
+      "caption": "Soon...",
+      "date": "",
+      "photo": ""
     }
-  },
+  ],
+  "guests": {},
   "_baseUrl": "https://wassim-invites.github.io/zaher-mira/"
 }
