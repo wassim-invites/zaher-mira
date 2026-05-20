@@ -52,6 +52,13 @@
     }
   ],
   "guests": {
+    "Rony-Abboudys-Family": {
+      "en": "Rony Abboudy's Family",
+      "members": [
+        "Rony",
+        "Cindi"
+      ]
+    },
     "Ryan-Abboudys-Family": {
       "en": "Ryan Abboudy's Family",
       "members": [
