@@ -51,6 +51,14 @@
       "photo": "Zaher & Mira/ZM4.jpg"
     }
   ],
-  "guests": {},
+  "guests": {
+    "Ryan-Abboudys-Family": {
+      "en": "Ryan Abboudy's Family",
+      "members": [
+        "Ryan",
+        "Wafaa"
+      ]
+    }
+  },
   "_baseUrl": "https://wassim-invites.github.io/zaher-mira/"
 }
