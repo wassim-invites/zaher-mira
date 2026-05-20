@@ -30,6 +30,10 @@
   "giftWhishHandle": "",
   "bgMusic": "Zaher & Mira/music.mp3",
   "ghRepo": "wassim-invites/zaher-mira",
+  "heroBg": "Zaher & Mira/ZM2.jpg",
+  "namesBg": "Zaher & Mira/ZM3.jpg",
+  "countdownBg": "Zaher & Mira/ZM4.jpg",
+  "thanksBg": "Zaher & Mira/ZM5.jpg",
   "storyItems": [
     {
       "caption": "Where it began",
