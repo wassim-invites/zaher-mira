@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zaher & Mira — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf9f7; --cream2:#f0ede8; --cream3:#e0dbd3;
+  --dark:#1a1a1a; --dark2:#2d2d2d;
+  --text:#333; --text2:#666; --text3:#999;
+  --white:#fff;
+  --green:#2d5a4b; --green2:#3d7a65;
+  --err:#c0392b; --ok:#2d6a4f;
+  --shadow:rgba(0,0,0,0.1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--cream2);color:var(--text);min-height:100vh}
+
+/* ── NAV ── */
+.top-nav{
+  background:var(--dark);padding:1rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;
+  border-bottom:2px solid var(--green);
+}
+.nav-brand{
+  font-family:'Great Vibes',cursive;font-size:1.6rem;
+  color:var(--cream2);letter-spacing:.02em;
+}
+.nav-tabs{display:flex;gap:.3rem;flex-wrap:wrap}
+.tab-btn{
+  font-family:'Montserrat',sans-serif;font-size:.58rem;
+  letter-spacing:.3em;padding:.5rem .9rem;
+  background:transparent;border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.5);cursor:pointer;text-transform:uppercase;transition:all .25s;
+}
+.tab-btn.act{background:var(--green);color:#fff;border-color:var(--green)}
+.tab-btn:hover:not(.act){border-color:rgba(255,255,255,.5);color:rgba(255,255,255,.8)}
+
+/* ── LAYOUT ── */
+.main{max-width:900px;margin:0 auto;padding:2rem 1.2rem 4rem}
+.tab-panel{display:none}.tab-panel.act{display:block}
+.sec-title{
+  font-family:'Great Vibes',cursive;font-size:2rem;
+  color:var(--dark);margin-bottom:.2rem;
+}
+.sec-orn{
+  font-family:'Montserrat',sans-serif;font-size:.55rem;
+  letter-spacing:.5em;color:var(--text3);text-transform:uppercase;
+  margin-bottom:1.8rem;display:block;
+}
+
+/* ── CARD ── */
+.card{
+  background:var(--white);border:1px solid var(--cream3);
+  padding:1.8rem;margin-bottom:1.5rem;
+  box-shadow:0 2px 20px var(--shadow);
+  position:relative;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent);
+}
+.card-title{
+  font-family:'Montserrat',sans-serif;font-size:.6rem;
+  letter-spacing:.35em;color:var(--text3);text-transform:uppercase;
+  margin-bottom:1.4rem;padding-bottom:.7rem;border-bottom:1px solid var(--cream3);
+}
+
+/* ── FORM ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group.full{grid-column:1/-1}
+label{
+  font-family:'Montserrat',sans-serif;font-size:.58rem;
+  letter-spacing:.25em;color:var(--text3);text-transform:uppercase;
+}
+input,select,textarea{
+  width:100%;padding:.7rem .9rem;
+  border:1px solid var(--cream3);background:var(--cream);
+  font-family:'Montserrat',sans-serif;font-size:.82rem;
+  color:var(--text);outline:none;transition:border-color .2s;
+  appearance:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--green)}
+textarea{resize:vertical;min-height:80px;line-height:1.6}
+.hint{font-size:.7rem;color:var(--text3);font-style:italic;margin-top:.2rem;line-height:1.6}
+
+/* ── PHOTO SLOT ── */
+.photo-slot{position:relative;width:100%;margin-top:.5rem}
+.photo-slot-empty{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:.4rem;padding:1.2rem;
+  border:1px dashed var(--cream3);background:var(--cream);
+  cursor:pointer;transition:all .25s;min-height:80px;text-align:center;
+}
+.photo-slot-empty:hover{border-color:var(--green);background:var(--cream2)}
+.photo-slot-empty span{font-size:.8rem;color:var(--text2)}
+.slot-wrap{position:relative}
+.photo-slot-rm{
+  position:absolute;top:.4rem;right:.4rem;
+  background:rgba(26,26,26,.75);color:#fff;border:none;cursor:pointer;
+  width:26px;height:26px;border-radius:50%;font-size:.75rem;
+  display:flex;align-items:center;justify-content:center;z-index:2;
+  transition:background .2s;
+}
+.photo-slot-rm:hover{background:var(--err)}
+
+/* ── STORY ITEMS ── */
+.story-items-list{display:flex;flex-direction:column;gap:.8rem;margin-top:.8rem}
+.story-item-row{
+  background:var(--cream2);border:1px solid var(--cream3);padding:1rem;
+  display:grid;grid-template-columns:1fr 1fr auto;gap:.6rem;align-items:start;
+}
+@media(max-width:600px){.story-item-row{grid-template-columns:1fr;}}
+.story-item-row .photo-mini{
+  width:100%;aspect-ratio:4/3;background-size:cover;background-position:center;
+  background-color:var(--cream3);margin-top:.4rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:.7rem;
+  color:var(--text3);border:1px dashed var(--cream3);
+}
+.story-rm-btn{
+  background:none;border:none;cursor:pointer;color:var(--text3);
+  font-size:1rem;padding:.3rem;align-self:center;transition:color .2s;
+}
+.story-rm-btn:hover{color:var(--err)}
+
+/* ── BUTTONS ── */
+.btn{
+  font-family:'Montserrat',sans-serif;font-size:.6rem;
+  letter-spacing:.35em;padding:.8rem 1.8rem;border:none;
+  cursor:pointer;text-transform:uppercase;transition:all .25s;display:inline-block;
+}
+.btn-primary{background:var(--dark);color:#fff}.btn-primary:hover{background:var(--green)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:var(--green2)}
+.btn-outline{background:transparent;border:1px solid var(--green);color:var(--green)}
+.btn-outline:hover{background:var(--green);color:#fff}
+.btn-danger{background:var(--err);color:#fff;font-size:.55rem;padding:.45rem .9rem;letter-spacing:.2em}
+.btn-danger:hover{opacity:.85}
+.btn-sm{padding:.45rem .9rem;font-size:.55rem;letter-spacing:.25em}
+.flex-gap{display:flex;gap:.7rem;flex-wrap:wrap}
+.mt1{margin-top:1rem}.mt2{margin-top:2rem}
+
+/* ── GENERATE ── */
+.gen-result{background:var(--cream);border:1px solid var(--cream3);padding:1.2rem;margin-top:1rem;display:none}
+.gen-result-url{font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:.05em;word-break:break-all;color:var(--green);margin-bottom:.8rem;line-height:1.8}
+.gen-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.fam-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;min-height:1.8rem}
+.fam-tag{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:var(--cream2);border:1px solid var(--cream3);
+  padding:.25rem .6rem;font-size:.78rem;color:var(--text2);
+}
+.fam-tag-rm{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.75rem;padding:0}
+.fam-tag-rm:hover{color:var(--err)}
+.fam-add-row{display:flex;gap:.5rem;margin-top:.4rem}
+.fam-add-row input{flex:1}
+
+/* ── LINKS TABLE ── */
+.links-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.links-table th{
+  font-family:'Montserrat',sans-serif;font-size:.55rem;letter-spacing:.28em;
+  padding:.6rem .8rem;border-bottom:1px solid var(--cream3);
+  text-align:left;color:var(--text3);text-transform:uppercase;
+}
+.links-table td{padding:.75rem .8rem;border-bottom:1px solid var(--cream3);vertical-align:middle;color:var(--text2)}
+.links-table tr:last-child td{border-bottom:none}
+.links-table tr:hover td{background:var(--cream2)}
+.badge{font-family:'Montserrat',sans-serif;font-size:.52rem;letter-spacing:.18em;padding:.2rem .55rem;display:inline-block;text-transform:uppercase}
+.badge-yes{background:rgba(45,106,79,.12);color:var(--ok)}
+.badge-no{background:rgba(192,57,43,.1);color:var(--err)}
+.badge-pending{background:var(--cream3);color:var(--text3)}
+.empty-state{text-align:center;padding:2.5rem;color:var(--text3);font-size:.82rem;font-style:italic}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+@media(max-width:500px){.stats-grid{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--white);border:1px solid var(--cream3);padding:1.2rem;text-align:center}
+.stat-num{font-size:2.5rem;color:var(--dark);line-height:1;display:block;font-weight:300}
+.stat-lbl{font-family:'Montserrat',sans-serif;font-size:.52rem;letter-spacing:.28em;color:var(--text3);text-transform:uppercase;margin-top:.3rem;display:block}
+
+/* ── SYNC STATUS ── */
+#sync-status{margin-top:1rem;padding:.8rem;border:1px solid var(--cream3);background:var(--cream2);display:none;font-size:.78rem;color:var(--text2);line-height:1.7}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;bottom:2rem;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--dark);color:#fff;
+  font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.22em;
+  padding:.75rem 1.6rem;z-index:999;transition:transform .35s ease;pointer-events:none;
+  border-top:2px solid var(--green);
+}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── GUIDE ── */
+.step{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
+.step-num{font-family:'Montserrat',sans-serif;font-size:.9rem;color:var(--green);min-width:1.8rem;font-weight:500;padding-top:.1rem}
+.step-body h4{font-family:'Montserrat',sans-serif;font-size:.65rem;letter-spacing:.22em;color:var(--dark);margin-bottom:.5rem;text-transform:uppercase}
+.step-body p{font-size:.8rem;color:var(--text2);line-height:1.8}
+.step-body code{font-family:monospace;font-size:.75rem;background:var(--cream2);padding:.12rem .35rem;border:1px solid var(--cream3);color:var(--green);word-break:break-all}
+.step-body a{color:var(--green);text-decoration:underline}
+.note-box{background:var(--cream2);border-left:3px solid var(--green);padding:.9rem 1.1rem;margin-top:1rem}
+.note-box p{font-size:.8rem;color:var(--text2);line-height:1.8}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+
+<nav class="top-nav">
+  <div class="nav-brand">Zaher &amp; Mira</div>
+  <div class="nav-tabs">
+    <button class="tab-btn act" onclick="showTab('settings')">Settings</button>
+    <button class="tab-btn" onclick="showTab('generate')">Generate</button>
+    <button class="tab-btn" onclick="showTab('rsvp')">RSVPs</button>
+    <button class="tab-btn" onclick="showTab('github')">GitHub Guide</button>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- ══════════ SETTINGS ══════════ -->
+<div class="tab-panel act" id="tab-settings">
+  <div class="sec-title">Wedding Settings</div>
+  <span class="sec-orn">— Zaher &amp; Mira —</span>
+
+  <!-- COUPLE -->
+  <div class="card">
+    <div class="card-title">✦ The Couple</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Groom First Name</label><input id="s-groomName" value="Zaher"></div>
+      <div class="form-group"><label>Groom Family Name</label><input id="s-groomFamily" value="Huneine"></div>
+      <div class="form-group"><label>Bride First Name</label><input id="s-brideName" value="Mira"></div>
+      <div class="form-group"><label>Bride Family Name</label><input id="s-brideFamily" value="Chehade"></div>
+    </div>
+  </div>
+
+  <!-- DATE & TIME -->
+  <div class="card">
+    <div class="card-title">✦ Date &amp; Time</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Wedding Date</label><input id="s-weddingDate" type="date" value="2026-09-26"></div>
+      <div class="form-group"><label>Wedding Time</label><input id="s-weddingTime" type="time" value="20:00"></div>
+      <div class="form-group"><label>Day of Week (shown on invite)</label><input id="s-weddingDay" value="Saturday" placeholder="e.g. Saturday"></div>
+    </div>
+  </div>
+
+  <!-- VENUE -->
+  <div class="card">
+    <div class="card-title">✦ Venue</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Venue Name</label><input id="s-venueName" value="Grand Ballroom"></div>
+      <div class="form-group full"><label>Venue Address</label><input id="s-venueAddress" value="Beirut, Lebanon"></div>
+      <div class="form-group full"><label>Google Maps Link</label><input id="s-venueMap" type="url" placeholder="https://maps.app.goo.gl/..."></div>
+      <div class="form-group full">
+        <label>Venue Photo</label>
+        <div class="photo-slot" id="slot-venuePhoto">
+          <div class="photo-slot-empty" id="empty-venuePhoto" onclick="trigUpload('venuePhoto')">
+            <span>📷 Upload venue photo</span>
+            <span class="hint" style="margin:0">Or paste URL below</span>
+          </div>
+          <input type="file" id="up-venuePhoto" accept="image/*" style="display:none" onchange="handlePhotoUpload(this,'venuePhoto')">
+        </div>
+        <input id="s-venuePhoto" type="url" placeholder="photos/venue.jpg" style="margin-top:.5rem" oninput="handleUrlInput(this,'venuePhoto')">
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTOS -->
+  <div class="card">
+    <div class="card-title">✦ Background Photos</div>
+    <p class="hint" style="margin-bottom:1.2rem">Each section of the invitation can have its own background photo.</p>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Hero Background (Slide 1 — "We are getting married")</label>
+        <div class="photo-slot" id="slot-heroBg">
+          <div class="photo-slot-empty" id="empty-heroBg" onclick="trigUpload('heroBg')"><span>📷 Upload hero photo</span></div>
+          <input type="file" id="up-heroBg" accept="image/*" style="display:none" onchange="handlePhotoUpload(this,'heroBg')">
+        </div>
+        <input id="s-heroBg" type="url" placeholder="photos/hero.jpg" style="margin-top:.5rem" oninput="handleUrlInput(this,'heroBg')">
+      </div>
+      <div class="form-group full">
+        <label>Names Section Background (behind the quote + names)</label>
+        <div class="photo-slot" id="slot-namesBg">
+          <div class="photo-slot-empty" id="empty-namesBg" onclick="trigUpload('namesBg')"><span>📷 Upload names photo</span></div>
+          <input type="file" id="up-namesBg" accept="image/*" style="display:none" onchange="handlePhotoUpload(this,'namesBg')">
+        </div>
+        <input id="s-namesBg" type="url" placeholder="photos/names.jpg" style="margin-top:.5rem" oninput="handleUrlInput(this,'namesBg')">
+      </div>
+      <div class="form-group full">
+        <label>Countdown Section Background</label>
+        <div class="photo-slot" id="slot-countdownBg">
+          <div class="photo-slot-empty" id="empty-countdownBg" onclick="trigUpload('countdownBg')"><span>📷 Upload countdown photo</span></div>
+          <input type="file" id="up-countdownBg" accept="image/*" style="display:none" onchange="handlePhotoUpload(this,'countdownBg')">
+        </div>
+        <input id="s-countdownBg" type="url" placeholder="photos/countdown.jpg" style="margin-top:.5rem" oninput="handleUrlInput(this,'countdownBg')">
+      </div>
+      <div class="form-group full">
+        <label>Thank You Closing Background</label>
+        <div class="photo-slot" id="slot-thanksBg">
+          <div class="photo-slot-empty" id="empty-thanksBg" onclick="trigUpload('thanksBg')"><span>📷 Upload closing photo</span></div>
+          <input type="file" id="up-thanksBg" accept="image/*" style="display:none" onchange="handlePhotoUpload(this,'thanksBg')">
+        </div>
+        <input id="s-thanksBg" type="url" placeholder="photos/thanks.jpg" style="margin-top:.5rem" oninput="handleUrlInput(this,'thanksBg')">
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR STORY -->
+  <div class="card">
+    <div class="card-title">✦ Our Story — Timeline</div>
+    <p class="hint" style="margin-bottom:1rem">Add polaroid-style photos with captions and dates. These appear in the scrollable "Our Story" section.</p>
+    <div class="story-items-list" id="story-items-list"></div>
+    <button class="btn btn-outline btn-sm mt1" onclick="addStoryItem()">+ Add Story Moment</button>
+  </div>
+
+  <!-- TEXT CONTENT -->
+  <div class="card">
+    <div class="card-title">✦ Text Content</div>
+    <div class="form-grid">
+      <div class="form-group full"><label>Hero Text (large script on opening photo)</label><input id="s-heroText" value="We are getting married"></div>
+      <div class="form-group full">
+        <label>Quranic / Religious Verse (Arabic)</label>
+        <textarea id="s-quranAr" rows="3" dir="rtl" style="font-family:'Amiri',serif;font-size:1rem">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</textarea>
+      </div>
+      <div class="form-group full"><label>Verse Reference</label><input id="s-quranRef" value="— Surah Ar-Rum 30:21"></div>
+      <div class="form-group full"><label>Invite Tagline ("Request the honor of...")</label><input id="s-inviteTagline" value="Request the honor of your presence at their wedding"></div>
+      <div class="form-group"><label>Countdown Pre-text</label><input id="s-countdownPre" value="Not long to go..."></div>
+      <div class="form-group"><label>Countdown Post-text</label><input id="s-countdownPost" value="... Until we become one!"></div>
+      <div class="form-group"><label>Story Section Title</label><input id="s-storyTitle" value="Our Story"></div>
+      <div class="form-group"><label>Venue Section Title</label><input id="s-venueScriptTitle" value="Time &amp; Place"></div>
+      <div class="form-group"><label>Thank You Text</label><input id="s-thanksText" value="Thank You"></div>
+    </div>
+  </div>
+
+  <!-- RSVP SETTINGS -->
+  <div class="card">
+    <div class="card-title">✦ RSVP Settings</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>RSVP Tagline</label>
+        <textarea id="s-rsvpTagline" rows="2">Your presence would mean the world to us and we can't imagine celebrating without you!</textarea>
+      </div>
+      <div class="form-group full"><label>RSVP Deadline Text (optional, e.g. "Please respond before August 1")</label><input id="s-rsvpDeadlineText" placeholder="Please respond before..."></div>
+      <div class="form-group full"><label>Contact Phone (shown after RSVP is submitted)</label><input id="s-rsvpPhone" type="tel" placeholder="+961 70 000 000"></div>
+      <div class="form-group full">
+        <label>Google Apps Script Webhook URL (cross-device RSVP sync)</label>
+        <input id="s-rsvpWebhook" type="url" placeholder="https://script.google.com/macros/s/...">
+        <span class="hint">Optional — see GitHub Guide tab for setup instructions.</span>
+      </div>
+      <div class="form-group full">
+        <label>Formspree Form ID (email notifications)</label>
+        <input id="s-formspreeId" placeholder="abcdefgh">
+        <span class="hint">Create a free form at formspree.io → copy the 8-char ID from the URL. Every RSVP will be emailed to you.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIFT -->
+  <div class="card">
+    <div class="card-title">✦ Gift / Registry</div>
+    <div class="form-grid">
+      <div class="form-group full"><label>Gift Section Title</label><input id="s-giftTitle" value="Wedding Registry"></div>
+      <div class="form-group full"><label>Gift Tagline</label><textarea id="s-giftTagline" rows="2">Your presence is the best gift you can give us, but should you feel inclined, a wedding list is available.</textarea></div>
+      <div class="form-group"><label>Bank — Name</label><input id="s-giftBankName" placeholder="Full Name"></div>
+      <div class="form-group"><label>Bank — Account Number</label><input id="s-giftBankAccount" placeholder="0000000000000"></div>
+      <div class="form-group full"><label>Bank — IBAN</label><input id="s-giftBankIban" placeholder="LB00 0000 0000 0000 0000 0000 0000"></div>
+      <div class="form-group full"><label>Whish Money Handle (optional)</label><input id="s-giftWhishHandle" placeholder="@handle"></div>
+    </div>
+  </div>
+
+  <!-- MUSIC & GITHUB -->
+  <div class="card">
+    <div class="card-title">✦ Music &amp; GitHub</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Background Music URL (.mp3)</label>
+        <input id="s-bgMusic" type="url" placeholder="photos/music.mp3">
+        <div style="margin-top:.4rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">
+          <label style="cursor:pointer;padding:.35rem .9rem;background:var(--cream3);border:1px solid var(--cream3);font-size:.72rem">
+            🎵 Upload MP3
+            <input type="file" accept="audio/mpeg,.mp3" style="display:none" onchange="handleMusicUpload(this)">
+          </label>
+          <span class="hint" style="margin:0">Upload .mp3 or paste a URL</span>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label>GitHub Repository (owner/repo)</label>
+        <input id="s-ghRepo" placeholder="wassim-invites/zaher-mira" value="wassim-invites/zaher-mira">
+      </div>
+      <div class="form-group full">
+        <label>GitHub Personal Access Token</label>
+        <input id="s-ghToken" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        <span class="hint">Settings → Developer settings → Personal access tokens → Fine-grained. Give Contents: Read and write on your repo.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-gap mt2">
+    <button class="btn btn-primary" onclick="saveAndSync()">Save &amp; Sync to GitHub ✦</button>
+    <button class="btn btn-outline" onclick="previewInvite()">Preview Invitation →</button>
+  </div>
+  <div id="sync-status"></div>
+  <div class="note-box mt1">
+    <p><strong>How it works:</strong> Click <strong>Save &amp; Sync to GitHub</strong> — settings are saved locally and pushed to <code>settings.json</code> on GitHub. All generated guest links update within ~30 seconds.</p>
+  </div>
+</div>
+
+<!-- ══════════ GENERATE ══════════ -->
+<div class="tab-panel" id="tab-generate">
+  <div class="sec-title">Generate Invitations</div>
+  <span class="sec-orn">— Create personalised links —</span>
+
+  <div class="card">
+    <div class="card-title">✦ Create a Personalised Link</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Guest / Family Name</label>
+        <input id="g-en" placeholder="e.g. The Khoury Family">
+      </div>
+      <div class="form-group full">
+        <label>Family Members — Who Can Attend</label>
+        <div class="hint" style="margin-bottom:.5rem">Add each person's name. The RSVP will show checkboxes so they select who's coming.</div>
+        <div class="fam-tags" id="fam-tags"></div>
+        <div class="fam-add-row">
+          <input id="fam-input" placeholder="e.g. Georges, Nadia, Marie…" onkeydown="if(event.key==='Enter'){event.preventDefault();addFamMember();}">
+          <button class="btn btn-outline btn-sm" onclick="addFamMember()">Add +</button>
+        </div>
+        <div class="hint" style="margin-top:.3rem">Leave empty for a simple Yes/No RSVP without name selection.</div>
+      </div>
+      <div class="form-group full">
+        <button class="btn btn-primary" onclick="generateLink()">Generate Link ✦</button>
+      </div>
+    </div>
+    <div class="gen-result" id="gen-result">
+      <div class="card-title" style="margin-bottom:.7rem">✦ Your Invitation Link</div>
+      <div class="gen-result-url" id="gen-url"></div>
+      <div class="gen-actions">
+        <button class="btn btn-green btn-sm" onclick="copyLink()">Copy Link</button>
+        <button class="btn btn-outline btn-sm" onclick="openLink()">Preview</button>
+        <button class="btn btn-outline btn-sm" onclick="shareWhatsApp()">Share WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✦ All Generated Links</div>
+    <div id="links-container"><div class="empty-state">No links generated yet.</div></div>
+  </div>
+</div>
+
+<!-- ══════════ RSVP ══════════ -->
+<div class="tab-panel" id="tab-rsvp">
+  <div class="sec-title">RSVP Responses</div>
+  <span class="sec-orn">— Guest responses —</span>
+  <div class="stats-grid">
+    <div class="stat-card"><span class="stat-num" id="stat-total">0</span><span class="stat-lbl">Links Sent</span></div>
+    <div class="stat-card"><span class="stat-num" id="stat-yes">0</span><span class="stat-lbl">Attending</span></div>
+    <div class="stat-card"><span class="stat-num" id="stat-guests">0</span><span class="stat-lbl">Total Guests</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">✦ Response Details</div>
+    <div id="rsvp-container"><div class="empty-state">No responses yet.</div></div>
+  </div>
+  <div class="flex-gap mt2">
+    <button class="btn btn-outline" onclick="exportCSV()">Export CSV</button>
+    <button class="btn btn-outline" onclick="syncRsvpNow()">↻ Sync from Sheet</button>
+    <button class="btn btn-danger" onclick="clearRsvp()">Clear All RSVPs</button>
+  </div>
+</div>
+
+<!-- ══════════ GITHUB GUIDE ══════════ -->
+<div class="tab-panel" id="tab-github">
+  <div class="sec-title">Hosting on GitHub Pages</div>
+  <span class="sec-orn">— Free online hosting —</span>
+  <div class="card">
+    <div class="card-title">✦ Step-by-Step Setup</div>
+    <div class="step"><div class="step-num">1.</div><div class="step-body"><h4>Create GitHub Account</h4><p>Go to <a href="https://github.com" target="_blank">github.com</a> and sign up.</p></div></div>
+    <div class="step"><div class="step-num">2.</div><div class="step-body"><h4>Create Repository</h4><p>Click <strong>+ → New repository</strong>. Name it <code>zaher-mira</code>. Set to <strong>Public</strong>. Check <strong>"Add a README"</strong>. Click <strong>Create</strong>.</p></div></div>
+    <div class="step"><div class="step-num">3.</div><div class="step-body"><h4>Upload Files</h4><p>Click <strong>Add file → Upload files</strong>. Upload <code>invite.html</code> and <code>admin.html</code>. Click <strong>Commit changes</strong>.</p></div></div>
+    <div class="step"><div class="step-num">4.</div><div class="step-body"><h4>Enable GitHub Pages</h4><p>Go to <strong>Settings → Pages → Source → Deploy from branch → main / (root)</strong>. Click <strong>Save</strong>.</p></div></div>
+    <div class="step"><div class="step-num">5.</div><div class="step-body"><h4>Your site is live!</h4><p>After 1-2 minutes:<br><code>https://YOUR-USERNAME.github.io/zaher-mira/admin.html</code><br><code>https://YOUR-USERNAME.github.io/zaher-mira/invite.html</code></p></div></div>
+    <div class="step"><div class="step-num">6.</div><div class="step-body"><h4>Create GitHub Token</h4><p>Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank">github.com → Settings → Developer settings → Personal access tokens → Fine-grained</a>.<br>Generate token. Set: Expiration = No expiration. Repository = zaher-mira. Permissions → Contents: <strong>Read and write</strong>. Copy the token and paste it in Settings tab.</p></div></div>
+    <div class="step"><div class="step-num">7.</div><div class="step-body"><h4>Generate Guest Links</h4><p>Fill in all Settings, click <strong>Save &amp; Sync</strong>. Then go to <strong>Generate</strong>, enter guest name, copy link, send via WhatsApp.</p></div></div>
+    <div class="note-box"><p><strong>Photos tip:</strong> Upload photos to a <code>photos/</code> folder in your GitHub repo and use paths like <code>photos/hero.jpg</code> in the Settings fields.</p></div>
+
+    <div style="margin-top:2rem">
+      <div class="card-title">✦ Cross-Device RSVP (Google Apps Script)</div>
+      <p style="font-size:.8rem;color:var(--text2);line-height:1.8;margin-bottom:1rem">This makes every guest's RSVP appear in your dashboard from any device.</p>
+      <div class="step"><div class="step-num">1.</div><div class="step-body"><h4>Open Google Apps Script</h4><p>Go to <a href="https://script.google.com" target="_blank">script.google.com</a> → New project. Delete existing code. Paste the code below.</p></div></div>
+      <div style="margin:1rem 0">
+        <textarea id="gas-code" readonly onclick="this.select()" style="width:100%;height:240px;font-family:monospace;font-size:.68rem;line-height:1.7;padding:.8rem;border:1px solid var(--cream3);background:var(--cream2);color:var(--text);resize:none;cursor:pointer;outline:none;"></textarea>
+        <button class="btn btn-outline btn-sm" style="margin-top:.4rem" onclick="document.getElementById('gas-code').select();document.execCommand('copy');this.textContent='Copied! ✦';setTimeout(()=>this.textContent='Copy Code',2000)">Copy Code</button>
+      </div>
+      <div class="step"><div class="step-num">2.</div><div class="step-body"><h4>Deploy as Web App</h4><p>Click <strong>Deploy → New deployment → Web app</strong>. Execute as: Me. Who has access: <strong>Anyone</strong>. Click <strong>Deploy</strong>. Copy the URL.</p></div></div>
+      <div class="step"><div class="step-num">3.</div><div class="step-body"><h4>Paste in Settings</h4><p>Go to Settings tab → <strong>Google Apps Script Webhook URL</strong>. Paste the URL. Click <strong>Save &amp; Sync</strong>.</p></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- .main -->
+
+<script>
+/* ══════════════════════════════════════
+   CONSTANTS
+══════════════════════════════════════ */
+const DBK='wds_zm_settings', RK='wds_zm_rsvp', LK='wds_zm_links';
+
+const TEXT_FIELDS=['groomName','groomFamily','brideName','brideFamily',
+  'weddingDate','weddingTime','weddingDay','venueName','venueAddress','venueMap',
+  'venuePhoto','heroBg','namesBg','countdownBg','thanksBg',
+  'heroText','quranAr','quranRef','inviteTagline','countdownPre','countdownPost',
+  'storyTitle','venueScriptTitle','thanksText',
+  'rsvpTagline','rsvpDeadlineText','rsvpPhone','rsvpWebhook',
+  'giftTitle','giftTagline','giftBankName','giftBankAccount','giftBankIban','giftWhishHandle',
+  'bgMusic','ghRepo','ghToken','formspreeId'];
+
+const PHOTO_FIELDS=['heroBg','namesBg','countdownBg','thanksBg','venuePhoto'];
+
+/* ══════════════════════════════════════
+   TABS
+══════════════════════════════════════ */
+function showTab(name){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('act'));
+  document.getElementById('tab-'+name).classList.add('act');
+  event.currentTarget.classList.add('act');
+  if(name==='generate')renderLinks();
+  if(name==='rsvp'){renderRsvp();syncRsvpNow();}
+}
+
+/* ══════════════════════════════════════
+   LOAD / SAVE SETTINGS
+══════════════════════════════════════ */
+function loadSettings(){
+  try{
+    const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+    TEXT_FIELDS.filter(f=>!PHOTO_FIELDS.includes(f)).forEach(k=>{
+      const el=document.getElementById('s-'+k);
+      if(el&&s[k]!==undefined)el.value=s[k];
+    });
+    PHOTO_FIELDS.forEach(k=>{
+      const el=document.getElementById('s-'+k);
+      if(el&&s[k]){ el.value=s[k]; showPhotoSlot(k, resolveUrl(s[k], s), null); }
+    });
+    // Story items
+    if(s.storyItems && s.storyItems.length) loadStoryItems(s.storyItems);
+    else initDefaultStory();
+  }catch(e){initDefaultStory();}
+}
+
+function saveSettings(){
+  const s={};
+  TEXT_FIELDS.filter(f=>!PHOTO_FIELDS.includes(f)).forEach(k=>{
+    const el=document.getElementById('s-'+k);
+    if(el)s[k]=el.value;
+  });
+  PHOTO_FIELDS.forEach(k=>{
+    const el=document.getElementById('s-'+k);
+    if(el&&!el.dataset.idbKey&&el.value&&!el.value.startsWith('data:')&&!el.value.startsWith('blob:'))
+      s[k]=el.value;
+  });
+  s.storyItems=gatherStoryItems();
+  try{localStorage.setItem(DBK,JSON.stringify(s));toast('Settings saved ✦');}
+  catch(e){toast('⚠ Save failed');}
+}
+
+function resolveUrl(p,s){
+  if(!p)return'';
+  if(p.startsWith('http')||p.startsWith('blob:'))return p;
+  const repo=(s&&s.ghRepo)||localStorage.getItem(DBK) && JSON.parse(localStorage.getItem(DBK)||'{}').ghRepo||'';
+  if(!repo)return p;
+  const [owner,repoName]=repo.split('/');
+  return`https://raw.githubusercontent.com/${owner}/${repoName}/main/${p}`;
+}
+
+/* ══════════════════════════════════════
+   GITHUB PUSH
+══════════════════════════════════════ */
+async function pushToGitHub(onDone){
+  const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+  const token=(s.ghToken||'').trim();
+  const repo=(s.ghRepo||'wassim-invites/zaher-mira').trim();
+  if(!token){if(onDone)onDone(false,'No GitHub token');return;}
+  const ls=JSON.parse(localStorage.getItem(LK)||'[]');
+  const guests={};
+  ls.forEach(l=>{if(l.id)guests[l.id]={en:l.guestEn||'',members:l.famMembers||[]};});
+  const baseUrl=`https://${repo.split('/')[0]}.github.io/${repo.split('/')[1]}/`;
+  const fullSettings={...s,guests,_baseUrl:baseUrl};
+  delete fullSettings.ghToken;
+  const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(fullSettings,null,2))));
+  const apiUrl=`https://api.github.com/repos/${repo}/contents/settings.json`;
+  try{
+    let sha='';
+    const gr=await fetch(apiUrl,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
+    if(gr.ok)sha=(await gr.json()).sha||'';
+    const pr=await fetch(apiUrl,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(sha?{message:'Update settings',content:encoded,sha}:{message:'Update settings',content:encoded})});
+    if(pr.ok){if(onDone)onDone(true);}
+    else{const e=await pr.json();if(onDone)onDone(false,e.message||'API error');}
+  }catch(e){if(onDone)onDone(false,String(e));}
+}
+
+async function saveAndSync(){
+  saveSettings();
+  const syncDiv=document.getElementById('sync-status');
+  const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+  if(!(s.ghToken||'').trim()){syncDiv.style.display='block';syncDiv.style.color='var(--err)';syncDiv.textContent='⚠ Add GitHub token in Settings first.';return;}
+  syncDiv.style.display='block';syncDiv.style.color='var(--text3)';syncDiv.textContent='⏳ Writing settings.json to GitHub…';
+  pushToGitHub((ok,err)=>{
+    if(ok){const repo=s.ghRepo||'';const url=`https://raw.githubusercontent.com/${repo}/main/settings.json`;syncDiv.style.color='var(--ok)';syncDiv.innerHTML=`✅ Saved! <a href="${url}" target="_blank" style="color:var(--green)">Verify ↗</a>`;}
+    else{syncDiv.style.color='var(--err)';syncDiv.textContent='⚠ Failed: '+(err||'unknown error');}
+  });
+}
+
+function previewInvite(){
+  saveSettings();
+  window.open(location.href.replace('admin.html','invite.html')+'?preview=1','_blank');
+}
+
+/* ══════════════════════════════════════
+   PHOTO UPLOAD
+══════════════════════════════════════ */
+function trigUpload(id){document.getElementById('up-'+id).click();}
+
+function showPhotoSlot(field,src,idbKey){
+  if(!src)return;
+  if(!src.startsWith('http')&&!src.startsWith('blob:')&&!src.startsWith('data:')){
+    const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+    src=resolveUrl(src,s);
+  }
+  const slot=document.getElementById('slot-'+field);
+  const empty=document.getElementById('empty-'+field);
+  const urlInput=document.getElementById('s-'+field);
+  if(!slot)return;
+  const existing=slot.querySelector('.slot-wrap');
+  if(existing)existing.remove();
+  if(empty)empty.style.display='none';
+  const wrap=document.createElement('div');wrap.className='slot-wrap';wrap.style.position='relative';
+  const img=document.createElement('img');img.src=src;
+  img.style.cssText='width:100%;max-height:180px;object-fit:cover;display:block;border:1px solid var(--cream3)';
+  const rm=document.createElement('button');rm.className='photo-slot-rm';rm.textContent='✕';
+  rm.onclick=async(e)=>{
+    e.stopPropagation();
+    if(urlInput){urlInput.value='';delete urlInput.dataset.idbKey;}
+    wrap.remove();if(empty)empty.style.display='flex';
+    const fi=document.getElementById('up-'+field);if(fi)fi.value='';
+    toast('Photo removed');
+  };
+  wrap.appendChild(img);wrap.appendChild(rm);
+  slot.insertBefore(wrap,slot.querySelector('input[type=file]'));
+}
+
+async function handlePhotoUpload(input,field){
+  const file=input.files[0];if(!file)return;
+  const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+  const token=(s.ghToken||'').trim();
+  const repo=(s.ghRepo||'').trim();
+  if(!token||!repo){toast('⚠ Add GitHub token & repo first');input.value='';return;}
+  toast('Uploading photo…');
+  const syncDiv=document.getElementById('sync-status');
+  syncDiv.style.display='block';syncDiv.style.color='var(--text3)';syncDiv.textContent='⏳ Uploading photo…';
+  const blob=await compressImage(file,1200,0.80);
+  const b64=await blobToB64(blob);
+  const filename=`photos/${field}_${Date.now()}.jpg`;
+  const apiUrl=`https://api.github.com/repos/${repo}/contents/${filename}`;
+  try{
+    const pr=await fetch(apiUrl,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:'Upload '+filename,content:b64})});
+    if(!pr.ok){const e=await pr.json();syncDiv.style.color='var(--err)';syncDiv.textContent='⚠ Upload failed: '+(e.message||pr.status);toast('⚠ Upload failed');return;}
+    const urlInput=document.getElementById('s-'+field);
+    if(urlInput){urlInput.value=filename;delete urlInput.dataset.idbKey;}
+    const rawBase=`https://raw.githubusercontent.com/${repo}/main/`;
+    showPhotoSlot(field,rawBase+filename,null);
+    syncDiv.style.color='var(--ok)';syncDiv.textContent='✅ Photo uploaded → '+filename;
+    toast('Photo uploaded ✦');
+  }catch(e){syncDiv.style.color='var(--err)';syncDiv.textContent='⚠ Error: '+e;toast('⚠ Upload failed');}
+}
+
+function handleUrlInput(input,field){
+  const v=input.value.trim();
+  if(!v){const slot=document.getElementById('slot-'+field);const wrap=slot&&slot.querySelector('.slot-wrap');if(wrap)wrap.remove();const empty=document.getElementById('empty-'+field);if(empty)empty.style.display='flex';return;}
+  clearTimeout(input._t);
+  input._t=setTimeout(()=>{delete input.dataset.idbKey;const s=JSON.parse(localStorage.getItem(DBK)||'{}');showPhotoSlot(field,v.startsWith('http')?v:resolveUrl(v,s),null);},600);
+}
+
+function compressImage(file,maxW=1200,quality=0.80){
+  return new Promise(res=>{
+    const img=new Image(),url=URL.createObjectURL(file);
+    img.onload=()=>{
+      const scale=Math.min(1,maxW/img.width);
+      const w=Math.round(img.width*scale),h=Math.round(img.height*scale);
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);URL.revokeObjectURL(url);
+      c.toBlob(b=>res(b),'image/jpeg',quality);
+    };img.src=url;
+  });
+}
+function blobToB64(blob){
+  return new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result.split(',')[1]);fr.readAsDataURL(blob);});
+}
+
+async function handleMusicUpload(input){
+  const file=input.files[0];if(!file)return;
+  const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+  const token=(s.ghToken||'').trim(),repo=(s.ghRepo||'').trim();
+  if(!token||!repo){toast('⚠ Add GitHub token & repo first');input.value='';return;}
+  const syncDiv=document.getElementById('sync-status');
+  syncDiv.style.display='block';syncDiv.style.color='var(--text3)';syncDiv.textContent='⏳ Uploading music…';toast('Uploading music…');
+  const b64=await blobToB64(file);
+  const filename='photos/music.mp3';
+  const apiUrl=`https://api.github.com/repos/${repo}/contents/${filename}`;
+  try{
+    let sha='';const gr=await fetch(apiUrl,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
+    if(gr.ok)sha=(await gr.json()).sha||'';
+    const pr=await fetch(apiUrl,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(sha?{message:'Upload music',content:b64,sha}:{message:'Upload music',content:b64})});
+    if(!pr.ok){const e=await pr.json();syncDiv.style.color='var(--err)';syncDiv.textContent='⚠ Failed: '+(e.message||pr.status);return;}
+    const urlInput=document.getElementById('s-bgMusic');if(urlInput)urlInput.value=filename;
+    syncDiv.style.color='var(--ok)';syncDiv.textContent='✅ Music uploaded';toast('Music uploaded ✦');
+  }catch(e){syncDiv.style.color='var(--err)';syncDiv.textContent='⚠ Error: '+e;}
+}
+
+/* ══════════════════════════════════════
+   STORY ITEMS
+══════════════════════════════════════ */
+let storyItems=[];
+
+function initDefaultStory(){
+  storyItems=[
+    {caption:'Where it began',date:'',photo:''},
+    {caption:'We got engaged',date:'',photo:''},
+    {caption:'Soon...',date:'',photo:''}
+  ];
+  renderStoryItems();
+}
+
+function loadStoryItems(items){
+  storyItems=items.map(i=>({...i}));
+  renderStoryItems();
+}
+
+function gatherStoryItems(){
+  const rows=document.querySelectorAll('.story-item-row');
+  const items=[];
+  rows.forEach((row,i)=>{
+    const cap=row.querySelector('.si-caption');
+    const dt=row.querySelector('.si-date');
+    const ph=row.querySelector('.si-photo-url');
+    items.push({caption:cap?cap.value:'',date:dt?dt.value:'',photo:ph?ph.value:''});
+  });
+  return items;
+}
+
+function renderStoryItems(){
+  const list=document.getElementById('story-items-list');
+  if(!list)return;
+  list.innerHTML='';
+  storyItems.forEach((item,i)=>{
+    const row=document.createElement('div');row.className='story-item-row';
+    const col1=document.createElement('div');
+    col1.innerHTML=`
+      <label style="font-size:.55rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;display:block;margin-bottom:.3rem">Caption</label>
+      <input class="si-caption" value="${escHtml(item.caption||'')}" placeholder="e.g. Where it began" style="width:100%;padding:.55rem .8rem;border:1px solid var(--cream3);background:var(--cream);font-family:'Montserrat',sans-serif;font-size:.8rem;color:var(--text);outline:none">
+      <label style="font-size:.55rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;display:block;margin:.6rem 0 .3rem">Date</label>
+      <input class="si-date" value="${escHtml(item.date||'')}" placeholder="e.g. 23.03.23" style="width:100%;padding:.55rem .8rem;border:1px solid var(--cream3);background:var(--cream);font-family:'Montserrat',sans-serif;font-size:.8rem;color:var(--text);outline:none">
+    `;
+    const col2=document.createElement('div');
+    const photoPreviewStyle=item.photo?`background-image:url('${resolveUrl(item.photo,JSON.parse(localStorage.getItem(DBK)||'{}'))}');`:'';
+    col2.innerHTML=`
+      <label style="font-size:.55rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;display:block;margin-bottom:.3rem">Photo</label>
+      <div class="photo-mini" id="si-preview-${i}" style="${photoPreviewStyle}" onclick="document.getElementById('si-file-${i}').click()">${item.photo?'':'📷 Click to upload'}</div>
+      <input type="file" id="si-file-${i}" accept="image/*" style="display:none" onchange="handleStoryPhotoUpload(this,${i})">
+      <input class="si-photo-url" value="${escHtml(item.photo||'')}" placeholder="photos/story1.jpg" style="width:100%;padding:.45rem .7rem;border:1px solid var(--cream3);background:var(--cream);font-family:'Montserrat',sans-serif;font-size:.7rem;color:var(--text3);outline:none;margin-top:.3rem" oninput="updateStoryPhotoPreview(this,${i})">
+    `;
+    const col3=document.createElement('div');
+    col3.innerHTML=`<button class="story-rm-btn" onclick="removeStoryItem(${i})" title="Remove">✕</button>`;
+    row.appendChild(col1);row.appendChild(col2);row.appendChild(col3);
+    list.appendChild(row);
+  });
+}
+
+function addStoryItem(){
+  storyItems.push({caption:'',date:'',photo:''});
+  renderStoryItems();
+}
+function removeStoryItem(i){
+  storyItems.splice(i,1);renderStoryItems();
+}
+function updateStoryPhotoPreview(input,i){
+  const v=input.value.trim();
+  const prev=document.getElementById(`si-preview-${i}`);
+  if(prev){
+    if(v){const s=JSON.parse(localStorage.getItem(DBK)||'{}');prev.style.backgroundImage=`url('${resolveUrl(v,s)}')`;prev.textContent='';}
+    else{prev.style.backgroundImage='';prev.textContent='📷 Click to upload';}
+  }
+}
+
+async function handleStoryPhotoUpload(input,idx){
+  const file=input.files[0];if(!file)return;
+  const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+  const token=(s.ghToken||'').trim(),repo=(s.ghRepo||'').trim();
+  if(!token||!repo){toast('⚠ Add GitHub token & repo first');input.value='';return;}
+  toast('Uploading…');
+  const blob=await compressImage(file,1000,0.82);
+  const b64=await blobToB64(blob);
+  const filename=`photos/story${idx}_${Date.now()}.jpg`;
+  const apiUrl=`https://api.github.com/repos/${repo}/contents/${filename}`;
+  try{
+    const pr=await fetch(apiUrl,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:'Upload '+filename,content:b64})});
+    if(!pr.ok){toast('⚠ Upload failed');return;}
+    if(storyItems[idx])storyItems[idx].photo=filename;
+    const prev=document.getElementById(`si-preview-${idx}`);
+    const rawBase=`https://raw.githubusercontent.com/${repo}/main/`;
+    if(prev){prev.style.backgroundImage=`url('${rawBase+filename}')`;prev.textContent='';}
+    const urlInputs=document.querySelectorAll('.story-item-row .si-photo-url');
+    if(urlInputs[idx])urlInputs[idx].value=filename;
+    toast('Photo uploaded ✦');
+  }catch(e){toast('⚠ Error: '+e);}
+}
+
+/* ══════════════════════════════════════
+   LINK GENERATOR
+══════════════════════════════════════ */
+let lastGenUrl='',famMembers=[];
+
+function generateLink(){
+  const en=(document.getElementById('g-en').value||'').trim();
+  if(!en){toast('Please enter a guest name');return;}
+  saveSettings();
+  const id=en.replace(/[^a-zA-Z0-9 ]/g,'').trim().replace(/\s+/g,'-').substring(0,40)||('inv-'+Date.now());
+  const base=location.href.replace('admin.html','invite.html');
+  lastGenUrl=base+'?id='+encodeURIComponent(id);
+  const ls=JSON.parse(localStorage.getItem(LK)||'[]');
+  const filtered=ls.filter(x=>x.id!==id);
+  filtered.unshift({id,guestEn:en,famMembers:[...famMembers],url:lastGenUrl,created:new Date().toISOString(),rsvp:null,guests:0,attending:[]});
+  localStorage.setItem(LK,JSON.stringify(filtered));
+  famMembers=[];renderFamTags();document.getElementById('fam-input').value='';
+  pushToGitHub((ok)=>{if(ok)toast('Guest saved ✦');else toast('⚠ Saved locally — sync to GitHub');});
+  document.getElementById('gen-url').textContent=lastGenUrl;
+  document.getElementById('gen-result').style.display='block';
+  renderLinks();
+}
+
+function copyLink(){navigator.clipboard.writeText(lastGenUrl).then(()=>toast('Copied! ✦')).catch(()=>{const ta=document.createElement('textarea');ta.value=lastGenUrl;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Copied!');});}
+function openLink(){window.open(lastGenUrl,'_blank');}
+function shareWhatsApp(){
+  const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+  const msg=encodeURIComponent(`You are invited to the wedding of ${s.groomName||'Zaher'} & ${s.brideName||'Mira'} 🥂\n\nYour personal invitation:\n${lastGenUrl}`);
+  window.open('https://wa.me/?text='+msg,'_blank');
+}
+
+function addFamMember(){
+  const input=document.getElementById('fam-input');
+  const val=(input.value||'').trim();if(!val)return;
+  val.split(',').map(v=>v.trim()).filter(Boolean).forEach(name=>{if(!famMembers.includes(name)){famMembers.push(name);}});
+  renderFamTags();input.value='';input.focus();
+}
+function removeFamMember(name){famMembers=famMembers.filter(m=>m!==name);renderFamTags();}
+function renderFamTags(){
+  const c=document.getElementById('fam-tags');if(!c)return;
+  c.innerHTML=famMembers.map(n=>`<span class="fam-tag">${n}<button class="fam-tag-rm" onclick="removeFamMember('${n.replace(/'/g,"\\'")}')">✕</button></span>`).join('');
+}
+
+function renderLinks(){
+  const ls=JSON.parse(localStorage.getItem(LK)||'[]');
+  const c=document.getElementById('links-container');
+  if(!ls.length){c.innerHTML='<div class="empty-state">No links generated yet.</div>';return;}
+  const rs_links=JSON.parse(localStorage.getItem(RK)||'{}');
+  const rows=ls.map(l=>{
+    const date=new Date(l.created).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    // Prefer RK (most up-to-date), fall back to LK field
+    const rsvpEntry=rs_links[l.id];
+    const rsvpStatus=rsvpEntry?rsvpEntry.status:l.rsvp;
+    const rsvpAtt=rsvpEntry?(rsvpEntry.attending||[]):(l.attending||[]);
+    const rsvpGuests=rsvpEntry?(rsvpEntry.guests||0):(l.guests||0);
+    let badge='<span class="badge badge-pending">Pending</span>';
+    if(rsvpStatus==='yes'){const att=rsvpAtt.length?rsvpAtt.join(', '):(rsvpGuests+' guest');badge=`<span class="badge badge-yes">✅ ${att}</span>`;}
+    if(rsvpStatus==='no')badge='<span class="badge badge-no">❌ Declined</span>';
+    const mem=l.famMembers&&l.famMembers.length?`<br><span style="font-size:.72em;color:var(--text3)">${l.famMembers.join(' · ')}</span>`:'';
+    return`<tr>
+      <td><strong>${l.guestEn||'—'}</strong>${mem}</td>
+      <td>${badge}</td>
+      <td style="font-size:.75rem;color:var(--text3)">${date}</td>
+      <td>
+        <div style="display:flex;gap:.35rem;flex-wrap:wrap">
+          <button class="btn btn-outline btn-sm" onclick="copySpecific('${l.url}')">Copy</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteLink('${l.id}')">✕</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+  c.innerHTML=`<div style="overflow-x:auto"><table class="links-table"><thead><tr><th>Guest</th><th>RSVP</th><th>Created</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function copySpecific(url){navigator.clipboard.writeText(url).then(()=>toast('Copied!')).catch(()=>{const ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Copied!');});}
+function deleteLink(id){
+  if(!confirm('Delete this link?'))return;
+  let ls=JSON.parse(localStorage.getItem(LK)||'[]');ls=ls.filter(x=>x.id!==id);
+  localStorage.setItem(LK,JSON.stringify(ls));
+  try{const rs=JSON.parse(localStorage.getItem(RK)||'{}');delete rs[id];localStorage.setItem(RK,JSON.stringify(rs));}catch(e){}
+  renderLinks();
+  pushToGitHub((ok)=>toast(ok?'Deleted & synced ✦':'Deleted locally'));
+}
+
+/* ══════════════════════════════════════
+   RSVP TAB
+══════════════════════════════════════ */
+function renderRsvp(){
+  const rs=JSON.parse(localStorage.getItem(RK)||'{}');
+  const ls=JSON.parse(localStorage.getItem(LK)||'[]');
+  ls.forEach(l=>{if(l.id&&l.rsvp&&!rs[l.id])rs[l.id]={status:l.rsvp,guests:l.guests||0,attending:l.attending||[],date:l.rsvpDate||new Date().toISOString(),guestEn:l.guestEn||''};});
+  const entries=Object.entries(rs);
+  const total=ls.length,yes=entries.filter(([,v])=>v.status==='yes').length;
+  const guests=entries.filter(([,v])=>v.status==='yes').reduce((s,[,v])=>s+v.guests,0);
+  document.getElementById('stat-total').textContent=total;
+  document.getElementById('stat-yes').textContent=yes;
+  document.getElementById('stat-guests').textContent=guests;
+  const c=document.getElementById('rsvp-container');
+  if(!entries.length){c.innerHTML='<div class="empty-state">No responses yet.</div>';return;}
+  const nameMap={};ls.forEach(l=>{if(l.id)nameMap[l.id]={en:l.guestEn||''};});
+  const rows=entries.map(([id,v])=>{
+    const date=new Date(v.date).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const att=(v.attending&&v.attending.length)?v.attending.join(', '):(v.guests>0?v.guests+' guest':'—');
+    const badge=v.status==='yes'?`<span class="badge badge-yes">✅ ${att}</span>`:'<span class="badge badge-no">❌ Declined</span>';
+    const nameEn=v.guestEn||nameMap[id]?.en||'—';
+    return`<tr><td><strong>${nameEn}</strong></td><td>${badge}</td><td style="font-size:.75rem;color:var(--text3)">${date}</td></tr>`;
+  }).join('');
+  c.innerHTML=`<div style="overflow-x:auto"><table class="links-table"><thead><tr><th>Guest</th><th>Response</th><th>Date</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+
+  // Broadcast channel — live updates
+  try{
+    if(!window._rsvpBC){
+      window._rsvpBC=new BroadcastChannel('wds_zm_rsvp');
+      window._rsvpBC.onmessage=()=>{renderRsvp();renderLinks();toast('New RSVP ✦');};
+    }
+  }catch(e){}
+}
+
+function exportCSV(){
+  const rs=JSON.parse(localStorage.getItem(RK)||'{}');
+  const ls=JSON.parse(localStorage.getItem(LK)||'[]');
+  if(!Object.keys(rs).length){toast('No data to export');return;}
+  const nameMap={};ls.forEach(l=>{if(l.id)nameMap[l.id]={en:l.guestEn||'',members:l.famMembers||[]};});
+  const header='Guest,Response,Attending,Total,Date\n';
+  const rows=Object.entries(rs).map(([id,v])=>{
+    const link=nameMap[id]||{};
+    const att=(v.attending&&v.attending.length)?v.attending.join(' | '):'';
+    return`"${v.guestEn||link.en||id}","${v.status}","${att}","${v.guests}","${new Date(v.date).toLocaleDateString('en-GB')}"`;
+  }).join('\n');
+  const blob=new Blob(['\uFEFF'+header+rows],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='zaher-mira-rsvp.csv';a.click();
+  toast('CSV exported ✦');
+}
+
+async function syncRsvpNow(){
+  const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+  const webhook=(s.rsvpWebhook||'').trim();
+  if(!webhook){toast('⚠ No webhook URL in Settings');return;}
+  toast('Syncing…');
+  try{
+    const r=await fetch(webhook+'?t='+Date.now());if(!r.ok){toast('⚠ Sync failed: '+r.status);return;}
+    const rows=await r.json();if(!Array.isArray(rows)){toast('⚠ No data from sheet');return;}
+    const rs=JSON.parse(localStorage.getItem(RK)||'{}');
+    const ls=JSON.parse(localStorage.getItem(LK)||'[]');
+    let count=0;
+    rows.forEach(d=>{
+      // GAS returns keys exactly as column headers: ID, Guest, Response, Attending, Total, Date
+      // Also handle lowercase versions for flexibility
+      const id=String(d.ID||d.id||'').trim();
+      const status=String(d.Response||d.status||'').toLowerCase().trim();
+      if(!id||!status)return;
+      const attending=String(d.Attending||d.attending||'').split(',').map(x=>x.trim()).filter(Boolean);
+      const guests=parseInt(d.Total||d.guests||attending.length)||0;
+      const guestName=String(d.Guest||d.guestEn||'');
+      const date=String(d.Date||d.date||'');
+      rs[id]={status,guests,attending,date,guestEn:guestName};
+      const l=ls.find(x=>x.id===id);
+      if(l){l.rsvp=status;l.guests=guests;l.attending=attending;l.rsvpDate=date;}
+      count++;
+    });
+    localStorage.setItem(RK,JSON.stringify(rs));
+    localStorage.setItem(LK,JSON.stringify(ls));
+    renderRsvp();renderLinks();toast('Synced '+count+' responses ✦');
+  }catch(e){toast('⚠ Sync failed: '+e.message);}
+}
+
+function clearRsvp(){
+  if(!confirm('Clear all RSVPs?'))return;
+  localStorage.removeItem(RK);renderRsvp();toast('Cleared');
+}
+
+/* ══════════════════════════════════════
+   TOAST
+══════════════════════════════════════ */
+let _toastTimer;
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>el.classList.remove('show'),2800);
+}
+
+/* ══════════════════════════════════════
+   UTILS
+══════════════════════════════════════ */
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  // Gas code
+  const gasEl=document.getElementById('gas-code');
+  if(gasEl){
+    gasEl.value=[
+      '// Zaher & Mira — RSVP Google Apps Script',
+      'function doPost(e){',
+      '  try{',
+      '    var d=JSON.parse(e.postData.contents);',
+      '    var ss=SpreadsheetApp.getActiveSpreadsheet();',
+      '    var sheet=ss.getSheetByName("RSVPs")||ss.insertSheet("RSVPs");',
+      '    if(sheet.getLastRow()===0)sheet.appendRow(["ID","Guest","Response","Attending","Total","Date"]);',
+      '    var data=sheet.getDataRange().getValues();',
+      '    var existing=-1;',
+      '    for(var i=1;i<data.length;i++){if(String(data[i][0])===String(d.id)){existing=i+1;break;}}',
+      '    var row=[d.id||"",d.guestEn||"",d.status||"",d.attending||"",+d.guests||0,d.date||new Date().toLocaleDateString("en-GB")];',
+      '    if(existing>0)sheet.getRange(existing,1,1,6).setValues([row]);',
+      '    else sheet.appendRow(row);',
+      '    return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);',
+      '  }catch(err){return ContentService.createTextOutput(JSON.stringify({error:err.message})).setMimeType(ContentService.MimeType.JSON);}',
+      '}',
+      'function doGet(e){',
+      '  try{',
+      '    var ss=SpreadsheetApp.getActiveSpreadsheet();',
+      '    var sheet=ss.getSheetByName("RSVPs")||ss.insertSheet("RSVPs");',
+      '    if(sheet.getLastRow()<2)return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);',
+      '    var rows=sheet.getDataRange().getValues();',
+      '    var headers=rows[0];var result=[];',
+      '    for(var i=1;i<rows.length;i++){',
+      '      if(!rows[i][0])continue;',
+      '      var obj={};for(var j=0;j<headers.length;j++)obj[String(headers[j])]=rows[i][j];',
+      '      result.push(obj);',
+      '    }',
+      '    return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);',
+      '  }catch(err){return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);}',
+      '}'
+    ].join('\n');
+  }
+
+  loadSettings();
+  renderLinks();
+
+  // Auto-sync RSVPs from sheet on load (silently)
+  setTimeout(()=>{
+    const s=JSON.parse(localStorage.getItem(DBK)||'{}');
+    if((s.rsvpWebhook||'').trim()) syncRsvpNow();
+  }, 1500);
+
+  // Live RSVP sync via BroadcastChannel
+  try{
+    if(!window._adminBC){
+      window._adminBC=new BroadcastChannel('wds_zm_rsvp');
+      window._adminBC.onmessage=(e)=>{
+        const d=e.data;
+        if(d&&d.id&&(d.type==='rsvp_updated'||d.status)){
+          try{
+            // Write to RK (RSVP store)
+            const rs=JSON.parse(localStorage.getItem(RK)||'{}');
+            rs[d.id]={status:d.status,guests:d.guests||0,attending:d.attending||[],date:d.date||new Date().toISOString(),guestEn:d.guestEn||''};
+            localStorage.setItem(RK,JSON.stringify(rs));
+            // Also update LK (links list) so Generate tab reflects status
+            const ls=JSON.parse(localStorage.getItem(LK)||'[]');
+            const l=ls.find(x=>x.id===d.id);
+            if(l){l.rsvp=d.status;l.guests=d.guests||0;l.attending=d.attending||[];l.rsvpDate=d.date||'';}
+            localStorage.setItem(LK,JSON.stringify(ls));
+          }catch(e2){}
+        }
+        renderLinks();
+        if(document.getElementById('tab-rsvp').classList.contains('act'))renderRsvp();
+        toast('New RSVP ✦');
+      };
+    }
+  }catch(e){}
+});
+</script>
+</body>
+</html>
