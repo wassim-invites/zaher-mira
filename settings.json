@@ -53,14 +53,6 @@
       "photo": "Zaher & Mira/ZM4.jpg"
     }
   ],
-  "guests": {
-    "Wassim-Al-Babas-Family": {
-      "en": "Wassim Al Baba's Family",
-      "members": [
-        "Reine",
-        "Toufic"
-      ]
-    }
-  },
+  "guests": {},
   "_baseUrl": "https://wassim-invites.github.io/zaher-mira/"
 }
