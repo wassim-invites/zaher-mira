@@ -20,7 +20,7 @@
   "thanksText": "Thank You",
   "rsvpTagline": "Your presence would mean the world to us and we can't imagine celebrating without you!",
   "rsvpDeadlineText": "",
-  "rsvpPhone": "",
+  "rsvpPhone": "&",
   "rsvpWebhook": "https://script.google.com/macros/s/AKfycbwSI-WEw5CB28n8weqcka-5iwj3fadFmeVvaZ1Bzh8cH_GPufO91yhL8dOPltdqtwCW/exec",
   "giftTitle": "Wedding Registry",
   "giftTagline": "Your presence is the best gift you can give us, but should you feel inclined, a wedding list is available.",
