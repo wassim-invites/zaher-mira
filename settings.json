@@ -53,6 +53,14 @@
       "photo": "Zaher & Mira/ZM4.jpg"
     }
   ],
-  "guests": {},
+  "guests": {
+    "Wassim-El-Babas-Family": {
+      "en": "Wassim El Baba's Family",
+      "members": [
+        "Wassim",
+        "Lara"
+      ]
+    }
+  },
   "_baseUrl": "https://wassim-invites.github.io/zaher-mira/"
 }
